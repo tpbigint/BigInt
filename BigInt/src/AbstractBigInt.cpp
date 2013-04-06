@@ -1,10 +1,6 @@
 #include "Include.h"
 using namespace std;
 
-//////////////////////////////Artem/////////////////////////////////////////////////////////
-//////////////////////////////Artem////////////
-
-
 AbstractBigInt::AbstractBigInt(string & init_str) // number = str.begin()
  {
 	 if(init_str[0]== '0')
@@ -227,9 +223,6 @@ AbstractBigInt AbstractBigInt::operator+ (const AbstractBigInt &second )
 	}
 	return result;
 }
-
-
-
 
 bool AbstractBigInt::operator== (const AbstractBigInt &abi )
 	{
