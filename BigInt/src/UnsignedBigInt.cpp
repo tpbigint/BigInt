@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 
+
 ostream &operator << (ostream& ostr, UnsignedBigInt& a_bigint)
   {
 	  int32_t curr_coef = a_bigint.coef.size() -1;
