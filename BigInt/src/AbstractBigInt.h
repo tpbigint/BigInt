@@ -20,21 +20,21 @@ public:
   AbstractBigInt (const AbstractBigInt & );						//ready
   virtual ~AbstractBigInt () {};								//ready
   AbstractBigInt& operator= (AbstractBigInt );					//ready
-  AbstractBigInt operator+ (const AbstractBigInt & );
+  AbstractBigInt operator+ (const AbstractBigInt & );			//ready
   AbstractBigInt operator- (const AbstractBigInt & );
- // virtual AbstractBigInt operator* (const AbstractBigInt & ); //Разкомментируй когда будешь реализовывать
- // virtual AbstractBigInt operator/ (const AbstractBigInt & ); //Компилятор ругается на виртуальные функции без реализации
+  AbstractBigInt operator* (const AbstractBigInt & );			//ready
+ // virtual AbstractBigInt operator/ (const AbstractBigInt & );
   AbstractBigInt operator% (const AbstractBigInt & );
   AbstractBigInt operator++ ( );
   AbstractBigInt operator++ (int );
   AbstractBigInt operator-- ();
   AbstractBigInt operator-- (int );
-  bool operator== (const AbstractBigInt & );					//ready
-  bool operator!= (const AbstractBigInt & );					//ready
-  bool operator> (const AbstractBigInt & );						//ready
- // virtual bool operator< (const AbstractBigInt & );
- // virtual bool operator>= (const AbstractBigInt & );
- // virtual bool operator<= (const AbstractBigInt & );
+  bool operator== (const AbstractBigInt & );					//ready ?
+  bool operator!= (const AbstractBigInt & );					//ready ?
+  bool operator> (const AbstractBigInt & );						//ready ?
+  bool operator< (const AbstractBigInt & );						//ready ?
+  bool operator>= (const AbstractBigInt & );					//ready ?
+  bool operator<= (const AbstractBigInt & );					//ready ?
   bool operator&& (AbstractBigInt & );							//ready
   bool operator|| (AbstractBigInt & );							//ready
   AbstractBigInt operator! ();									//ready
@@ -44,9 +44,9 @@ public:
   AbstractBigInt operator^ (const AbstractBigInt & );			//ready
   AbstractBigInt operator<< (const AbstractBigInt & );
   AbstractBigInt operator>> (const AbstractBigInt & );
-  AbstractBigInt operator+= (const AbstractBigInt & );
+  AbstractBigInt operator+= (const AbstractBigInt & );			//ready ?
   AbstractBigInt operator-= (const AbstractBigInt & );
-  //virtual AbstractBigInt operator*= (const AbstractBigInt & );
+  AbstractBigInt operator*= (const AbstractBigInt & );			//ready ?
   //virtual AbstractBigInt operator/= (const AbstractBigInt & );
   AbstractBigInt operator%= (const AbstractBigInt & );
   AbstractBigInt operator&= (const AbstractBigInt & );			//ready
@@ -58,7 +58,7 @@ public:
 
   void StringToBigInt(base, string &);
   AbstractBigInt max(AbstractBigInt, AbstractBigInt);
-  AbstractBigInt AdditionalCode(AbstractBigInt &);					//almost ready
+  AbstractBigInt AdditionalCode(AbstractBigInt &);				//almost ready
 };
 
 

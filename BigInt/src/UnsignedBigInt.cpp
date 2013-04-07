@@ -9,7 +9,7 @@ ostream &operator << (ostream& ostr, UnsignedBigInt& a_bigint)
 	  {
 		  ostr.width(4); // print by 4 symbols per one time
 		  ostr.fill('0');
-		  ostr << hex << a_bigint.coef.at(curr_coef);
+		  ostr << hex << a_bigint.coef.at(curr_coef) << " ";;
 		  curr_coef--;
 	  }
 	  ostr << endl;

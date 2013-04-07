@@ -205,25 +205,6 @@ AbstractBigInt AbstractBigInt::operator- (const AbstractBigInt & second )
 	return *this;
 }
 
-AbstractBigInt AbstractBigInt::operator+ (const AbstractBigInt &second )
-{
-	AbstractBigInt result = max(*this, second);
-	uint16_t division = 0;
-	uint32_t temp;
-	for(uint32_t i=0; i<coef.size(); i++ )
-	{
-		temp = coef.at(i) + second.coef.at(i) + division;
-		if ((temp>>15) == 1)
-			{
-				division = 1;
-				temp = temp & 0xFFFF;
-				result = temp;
-			}
-		else division = 0;
-	}
-	return result;
-}
-
 bool AbstractBigInt::operator== (const AbstractBigInt &abi )
 	{
 		uint16_t i;
@@ -252,18 +233,238 @@ bool AbstractBigInt::operator!= (const AbstractBigInt &abi )
 	return false;
 }
 
-bool AbstractBigInt::operator> (const AbstractBigInt &abi )
+bool AbstractBigInt::operator> (const AbstractBigInt &right )
 	{
-		int i;
-		if(abi.coef.size() > coef.size()) {return true;}
-		else if(abi.coef.size() < coef.size()) {return false;}
-		else{
-			for(i=abi.coef.size()-1;i==0;i--)
-				{
-					if(abi.coef[i]>coef[i]) {return true;}
-					else if (abi.coef[i]<coef[i]) {return false;}
-				}
+		int32_t i,t_r,t_l;
+
+		t_l=coef.size();
+		t_r=right.coef.size();
+		cout<<t_l;
+		cout << " T_L:\n";
+		cout<<t_r;
+		cout << " T_R:\n";
+
+
+		if(right.coef.size() > coef.size())
+		{
+			for (i=right.coef.size()-1;i>coef.size();i--)
+			{
+				if(right.coef[i]>0x0){return false;}
 			}
+			for(i=coef.size()-1;i>=0;i--)
+			{
+				if(right.coef[i]>coef[i]){return false;}
+				else if(right.coef[i]<coef[i]){return true;}
+			}
+		}
+		else if(right.coef.size() < coef.size())
+		{
+			for(i=coef.size()-1;i>=right.coef.size();i--)
+			{
+				if(coef[i]>0x0){return true;}
+			}
+			for(i=right.coef.size()-1;i>=0;i--)
+			{
+				if(right.coef[i]>coef[i]){return false;}
+				else if(right.coef[i]<coef[i]){return true;}
+			}
+		}
+		else
+		{
+			for(i=coef.size()-1;i>=0;i--)
+			{
+				//cout << " !";
+				if(right.coef[i]>coef[i]){return false;}
+				if(right.coef[i]<coef[i]){return true ;}
+
+			}
+		}
+
 		return false;
 		}
+
+bool AbstractBigInt::operator>= (const AbstractBigInt &right )
+	{
+		int32_t i,t_r,t_l;
+
+		t_l=coef.size();
+		t_r=right.coef.size();
+		cout<<t_l;
+		cout << " T_L:\n";
+		cout<<t_r;
+		cout << " T_R:\n";
+
+
+		if(right.coef.size() > coef.size())
+		{
+			for (i=right.coef.size()-1;i>coef.size();i--)
+			{
+				if(right.coef[i]>0x0){return false;}
+			}
+			for(i=coef.size()-1;i>=0;i--)
+			{
+				if(right.coef[i]>coef[i]){return false;}
+				else if(right.coef[i]<coef[i]){return true;}
+			}
+		}
+		else if(right.coef.size() < coef.size())
+		{
+			for(i=coef.size()-1;i>=right.coef.size();i--)
+			{
+				if(coef[i]>0x0){return true;}
+			}
+			for(i=right.coef.size()-1;i>=0;i--)
+			{
+				if(right.coef[i]>coef[i]){return false;}
+				else if(right.coef[i]<coef[i]){return true;}
+			}
+		}
+		else
+		{
+			for(i=coef.size()-1;i>=0;i--)
+			{
+				//cout << " !";
+				if(right.coef[i]>coef[i]){return false;}
+				if(right.coef[i]<coef[i]){return true ;}
+
+			}
+		}
+
+		return true;
+		}
+
+bool AbstractBigInt::operator< (const AbstractBigInt &right )
+	{
+		int32_t i,t_r,t_l;
+
+		t_l=coef.size();
+		t_r=right.coef.size();
+		cout<<t_l;
+		cout << " T_L:\n";
+		cout<<t_r;
+		cout << " T_R:\n";
+
+
+		if(right.coef.size() > coef.size())
+		{
+			for (i=right.coef.size()-1;i>coef.size();i--)
+			{
+				if(right.coef[i]>0x0){return true;}
+			}
+			for(i=coef.size()-1;i>=0;i--)
+			{
+				if(right.coef[i]>coef[i]){return true;}
+				else if(right.coef[i]<coef[i]){return false;}
+			}
+		}
+		else if(right.coef.size() < coef.size())
+		{
+			for(i=coef.size()-1;i>=right.coef.size();i--)
+			{
+				if(coef[i]>0x0){return false;}
+			}
+			for(i=right.coef.size()-1;i>=0;i--)
+			{
+				if(right.coef[i]>coef[i]){return true;}
+				else if(right.coef[i]<coef[i]){return false;}
+			}
+		}
+		else
+		{
+			for(i=coef.size()-1;i>=0;i--)
+			{
+				//cout << " !";
+				if(right.coef[i]>coef[i]){return false;}
+				if(right.coef[i]<coef[i]){return true ;}
+
+			}
+		}
+
+		return false;
+		}
+
+
+AbstractBigInt AbstractBigInt::operator+ (const AbstractBigInt &right )  //оператор реализован без битовых операций
+{
+	int incr=0;//флаг перехода разряда false-переход не нужен
+	uint32_t buf;   //буфер в котором содержится промежуточны результат
+	int size;       //минимальный из размеров вектора
+	int i,j;
+	AbstractBigInt temp;
+	if (coef.size() > right.coef.size()) size=right.coef.size(); // поиск минимального размера
+	else size=coef.size();
+	for (i=0;i<size;i++)                                 //цикл поэлементного сложения
+		{
+			buf=coef[i]+right.coef[i]+incr;
+			if(i>0) temp.coef.push_back( (buf & 0xFFFF) );
+			else temp.coef[i]=buf & 0xFFFF;
+			incr=(buf>>16);
+		}
+		if (incr>0)
+		{
+			for(j=i;coef[j]==0xFFFF;j++) temp.coef[j]=0x0000;      //поиск элемента не равного максимально возможному и запись нулей если элемент максимален
+			if(j==coef.size()) temp.coef.push_back(0x0001);              //проверка на выход за пределы изначального вектора и запись инкремента
+			else temp.coef[j]+=0x0001;                         //иначе инкрементация
+		}
+
+		return temp;
+
+}
+
+AbstractBigInt AbstractBigInt::operator++ ()
+{
+	*(this)=(*this)+1;
+	return *this;
+}
+
+AbstractBigInt AbstractBigInt::operator++ (int)
+{
+	AbstractBigInt temp=*this;
+	(*this)=(*this)+1;
+	return temp;
+}
+
+AbstractBigInt AbstractBigInt::operator+= (const AbstractBigInt &right )
+{
+	(*this)=(*this)+right;
+	return *this;
+}
+
+AbstractBigInt AbstractBigInt::operator* (const AbstractBigInt &right )
+{
+	int rightsize=right.coef.size();
+	int size=coef.size();
+	AbstractBigInt temp;
+	int incr=0;
+	uint64_t buf;
+	int i,j,k=0;
+	for(i=0;i<size;i++)                        //цикл прохода посимвольно по второму множителю
+	{
+		for (j=0;j<rightsize;j++)                        //цикл похода посимвольно по первому множителю
+		{
+			buf=temp.coef[i+j]+coef[j]*right.coef[i]+incr;     //результат умножения элементов массива+ инкремент+предыдущее значение ячейки
+			if( (i+j)>k )                                     //запись и перезапись элемента вектора
+				{                                             //а также проверка на наличие элемента в момент записи
+					temp.coef.push_back(buf & 0xFFFF);
+					k++;                                       //увеличение счётчика элементов вектора
+				}
+			else temp.coef[i+j]=buf & 0xFFFF;
+			incr=buf>>16;                                 //вычисление инкремента от умножения
+
+		}
+	if(incr>0)                                              //проверка на переход в новый разряд
+		{
+		temp.coef.push_back(incr);
+		incr=0;
+		k++;
+		}
+	}
+	return temp;
+}
+
+AbstractBigInt AbstractBigInt::operator*= (const AbstractBigInt &right )
+{
+	(*this)=(*this)*right;
+	return *this;
+}
 

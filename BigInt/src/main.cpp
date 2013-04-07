@@ -1,10 +1,5 @@
-/*
- * main.cpp
- *
- *  Created on: 15.03.2013
- *      Author: artem
- */
 #include "Include.h"
+
 int main()
 {
 	bool bb=false;
@@ -43,17 +38,47 @@ int main()
 	UnsignedBigInt result;
 	cout << and_test1;
 
-	//cout << and_test1 & and_test2;
-	//and_test1 = (and_test1 & and_test2);
-	//cout <<  and_test1;
+	cout << "Testing operator +:\n";
+	UnsignedBigInt plus_test1((uint32_t)0x1234590f);
+	UnsignedBigInt plus_test2((uint32_t)0x00abcdff);
+	UnsignedBigInt plus_result;
+	plus_test1+=plus_test2;
+	cout<<"1234 590f + 00ab cdff = "<<(plus_test1);
+	plus_test2=0xffffffff;
+	plus_result=plus_test1+plus_test2;
+	cout<<"1234 590f + 00ab cdff + ffff ffff = "<<plus_result<<"\n";
+	//cout<<(++plus_test2);          FIXME:из-за бага невозможно проверить разницу
+	//cout<<"\n";                    работы инкремента и декремента
+	//cout<<(plus_test2++)<<"\n";
+	//cout<<plus_test2<<"\n";
 
-//	cout << "Testing operator +:\n";
-//	UnsignedBigInt and_test_1((uint32_t)0x1234590f);
-//	UnsignedBigInt and_test_2((uint32_t)0xabcdff);
-//	UnsignedBigInt result_;
-//	result_ = and_test_1 +and_test_2;
-//	cout << result_;
 
+	cout << "Testing operator *:\n";
+	string str1("0x27a7b31234590f");
+	string str2("0x12ab74df35c1");
+	UnsignedBigInt proizv_test1(str1);
+	UnsignedBigInt proizv_test2(str2);
+	UnsignedBigInt result1;
+	UnsignedBigInt res;
+	// res=proizv_test1*proizv_test2; FIXME: change error connecting with operator =
+	cout<<"27 a7b3 1234 590f * 12ab 74df 35c1 = "<<res<<"\n";
+	//proizv_test1*=proizv_test2;    по какой-то причине выдаёт ошибку
+	//cout<<proizv_test1;
+
+	/*cout << "Testing operator -:\n";
+		UnsignedBigInt minus_test1((uint32_t)0x1234590f);
+		UnsignedBigInt minus_test2((uint32_t)0x00abcdff);
+		UnsignedBigInt result2;
+		result1=minus_test1-minus_test2;
+		cout<<"1234590f * 00abcdff = "<<(minus_test1)<<"\n";*/
+
+	cout << "Testing operator < :\n";
+	UnsignedBigInt test5(0xffff);
+	UnsignedBigInt test6(0xffff);
+	if(test5 >= test6)
+	{
+		cout<<'1';} else {cout<<'0' << "\n";
+	}
 
 
 
